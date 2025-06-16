@@ -26,7 +26,19 @@ def master_bits_for_slot(slot_index: int) -> int:
         bits = 3
     return bits
 
+ENTITY_CONST_244    = 2
+Entity_const_172 = 3
 
+CLASS_NAME_TO_ID = {
+    "Paladin": 0,
+    "Rogue":   1,
+    "Mage":    2,
+}
+stringPairs1 = [("Reputation","Friendly"), ("DailyQuest","Complete")]  # etc.
+stringTriples = [(101, "Title1","Desc1"), (102,"Title2","Desc2")]
+
+
+class_10_const_665 = 4
 ENT_MAX_SLOTS = 7
 GS_BITS = 2             # Game.const_813
 MAX_CHAR_LEVEL_BITS = 6 # Entity.MAX_CHAR_LEVEL_BITS
@@ -110,8 +122,3 @@ NEWS_EVENTS = {
         1387602000,
     ],
 }
-
-
-
-
-World_ID =  {}
