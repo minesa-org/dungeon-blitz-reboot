@@ -6,6 +6,15 @@
 
 This repo lets you run **Dungeon Blitz**, the classic browser MMO, directly on your machine using **Flash emulator**. 
 
+## 📖 Getting Started
+
+- Python Installed:
+https://www.python.org/downloads/
+- Flashpoint Installed: (Requires Flashpoint Infinity)
+https://flashpointarchive.org/downloads
+
+Currently, Dungeon Blitz is only supported on Windows.
+
 ## 🖥 Required Local Servers
 
 1. Go to:
