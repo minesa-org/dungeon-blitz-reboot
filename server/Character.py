@@ -223,12 +223,19 @@ def build_paperdoll_packet(character_dict):
 
     return buf.to_bytes()
 
-def build_login_character_list_bitpacked(characters):
+def build_login_character_list_bitpacked(characters, user_id: int = 1):
     """
     Builds the 0x15 login-character-list packet.
+
+    Parameters
+    ----------
+    characters : list[dict]
+        The character dictionaries to include in the packet.
+    user_id : int, optional
+        ID of the account owning the characters. Defaults to ``1`` for
+        compatibility with older callers.
     """
     buf = BitBuffer()
-    user_id   = 1       # you’ll overwrite this per-session
     max_chars = 8
     char_count= len(characters)
 

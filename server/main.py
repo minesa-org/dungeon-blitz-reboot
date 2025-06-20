@@ -90,7 +90,11 @@ def handle_client(session: ClientSession):
               session.user_id = get_or_create_user_id(email)
               session.char_list = load_characters(session.user_id)
               session.authenticated = True  # ← grant auth
-              conn.sendall(build_login_character_list_bitpacked(session.char_list))
+              conn.sendall(
+                  build_login_character_list_bitpacked(
+                      session.char_list, session.user_id
+                  )
+              )
 
 
             elif pkt == 0x14:
@@ -119,7 +123,11 @@ def handle_client(session: ClientSession):
                 session.user_id = user_id
                 session.char_list = load_characters(user_id)
                 session.authenticated = True  # ← grant auth
-                conn.sendall(build_login_character_list_bitpacked(session.char_list))
+                conn.sendall(
+                    build_login_character_list_bitpacked(
+                        session.char_list, session.user_id
+                    )
+                )
                 print(f"[{session.addr}] Logged in {email} → user_id={user_id}, chars={len(session.char_list)}")
 
 
@@ -150,7 +158,11 @@ def handle_client(session: ClientSession):
                 session.char_list.append(new_char)
                 save_characters(session.user_id, session.char_list)
                 # send updated list + paperdoll + popup
-                conn.sendall(build_login_character_list_bitpacked(session.char_list))
+                conn.sendall(
+                    build_login_character_list_bitpacked(
+                        session.char_list, session.user_id
+                    )
+                )
                 pd = build_paperdoll_packet(new_char)
                 conn.sendall(struct.pack(">HH",0x1A,len(pd))+pd)
                 popup = "Character Successfully Created".encode("utf-8")
@@ -197,7 +209,7 @@ def handle_client(session: ClientSession):
                             old_x=0,
                             old_y=0,
                             old_flashvars="",
-                            user_id=1,
+                            user_id=session.user_id,
                             new_level_swf=level_swf,
                             new_map_lvl=1,
                             new_base_lvl=1,
@@ -271,7 +283,7 @@ def handle_client(session: ClientSession):
                     old_x=session.player_x,
                     old_y=session.player_y,
                     old_flashvars=session.current_internal,
-                    user_id=1,
+                    user_id=session.user_id,
                     new_level_swf=swf,
                     new_map_lvl=ml,
                     new_base_lvl=bl,
