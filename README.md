@@ -26,8 +26,9 @@ python server/main.py
 python server/PolicyServer.py
 ```
 
-4. Now FlashPoint:
-  - Open it
+4. Now Open FlashPoint (If you are having bugs/issues, try opening as Administrator):
+  - Go to "Config" Tab on the Top Left navigation menu
+  - Enable Editing 
   - Go to Curation
   - Create a curation
   - Fill required inputs
@@ -37,7 +38,10 @@ python server/PolicyServer.py
   ```bash
   http://db.bmgstatic.com/p/cbv/DungeonBlitz.swf?fv=cbq&gv=cbv
   ```
-  - Run it
+  - Download [flashplayer-debugger/flashplayer32_0r0_465_sa_debug.exe](https://github.com/AngelMako/flash-reboot/blob/main/flashplayer-debugger/flashplayer32_0r0_465_sa_debug.exe) (Recommended version)
+
+Example Config File:
+![image](https://github.com/user-attachments/assets/6e730d36-bb72-4ddd-b2d5-aba4e304715c)
 
 Enjoy! ✌🏻🥳
 
