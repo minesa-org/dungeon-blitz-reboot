@@ -45,9 +45,8 @@ class ClientSession:
         self.authenticated = False
 
         self.player_data = {}
-        self.current_character = None   # ← initialize here
+        self.current_character = None
         self.current_level = None
-        self.world_loaded = False    # ← add this
 
     def issue_token(self, char):
         tk = new_transfer_token()
@@ -239,10 +238,7 @@ def handle_client(session: ClientSession):
             elif pkt == 0x2D:
                 door_id = BitReader(data[4:]).read_method_4()
                 print(f"[{session.addr}] OPEN_DOOR packet received, door_id={door_id}")
-                # Only send Enter‑World once per session
-                if session.world_loaded:
-                    print("World already loaded; skipping world‑change on door click.")
-                    continue
+
 
                 current = getattr(session, "current_level", None)
                 if current is None:
@@ -279,7 +275,6 @@ def handle_client(session: ClientSession):
                 conn.sendall(enter_pkt)
                 print(f"Sent level‑change: {current} → {next_level} (token={tk})")
                 session.current_level = next_level
-                session.world_loaded = True  # mark that we've done it
             elif pkt == 0xBD:
                 handle_hotbar_packet(session, data)
 
