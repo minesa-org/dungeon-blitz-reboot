@@ -12,7 +12,13 @@ from Character import (
 )
 from Commands import handle_hotbar_packet
 from BitUtils import BitBuffer
-from constants import EntType, DyeType, DOOR_TUTORIALBOAT, DOOR_LEAVEHOME
+from constants import (
+    EntType,
+    DyeType,
+    DOOR_TUTORIALBOAT,
+    DOOR_LEAVEHOME,
+    DOOR_GOHOME,
+)
 from WorldEnter import build_enter_world_packet, Player_Data_Packet
 from bitreader import BitReader
 from PolicyServer import start_policy_server
@@ -246,8 +252,11 @@ def handle_client(session: ClientSession):
                     print(f"No current_level; cannot open door {door_id}")
                     continue
 
+                # door 999 teleports home regardless of current zone
+                if door_id == DOOR_GOHOME:
+                    next_level = "CraftTown"
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
-                if current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
+                elif current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
                     next_level = "TutorialBoat"
                 # Leaving the player's house back to NewbieRoad
                 elif current == "CraftTown" and door_id == DOOR_LEAVEHOME:

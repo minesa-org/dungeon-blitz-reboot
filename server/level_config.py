@@ -353,6 +353,8 @@ DOOR_MAP = {
     ('NewbieRoad', 103): 'DreamDragonDungeon',
     ('NewbieRoad', 104): 'TutorialBoat',
     ('NewbieRoad', 105): 'GoblinRiverDungeon',
+    # teleport back inside the player house from any zone
+    ('NewbieRoad', 999): 'CraftTown',
     # from 'NewbieRoadHard'
     ('NewbieRoadHard', 2): 'SwampRoadNorthHard',
     ('NewbieRoadHard', 101): 'TutorialDungeonHard',
