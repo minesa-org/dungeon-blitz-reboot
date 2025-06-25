@@ -55,6 +55,34 @@ class ClientSession:
         self.current_char = None
         self.current_level = None
 
+    def enter_level(self, next_level: str, old_level: str, door_id: int):
+        """Send an enter-world packet to change maps and update state."""
+        swf_path, map_lvl, base_lvl, is_inst = LEVEL_CONFIG[next_level]
+        char = self.current_char or self.player_data
+        tk = self.issue_token(char)
+        enter_pkt = build_enter_world_packet(
+            transfer_token=tk,
+            old_level_id=LEVEL_CONFIG[old_level][1],
+            old_swf=LEVEL_CONFIG[old_level][0],
+            has_old_coord=False,
+            old_x=0,
+            old_y=0,
+            host=HOST,
+            port=8080,
+            new_level_swf=swf_path,
+            new_map_lvl=map_lvl,
+            new_base_lvl=base_lvl,
+            new_internal=next_level,
+            new_moment="",
+            new_alter="",
+            new_is_inst=is_inst,
+        )
+        self.conn.sendall(enter_pkt)
+        print(
+            f"Sent level‑change: {old_level} → {next_level} via door {door_id} (token={tk})"
+        )
+        self.current_level = next_level
+
     def issue_token(self, char):
         tk = new_transfer_token()
         pending_world[tk] = char
@@ -271,28 +299,8 @@ def handle_client(session: ClientSession):
                         print(f"Unknown door key: {key}")
                         continue
                     next_level = DOOR_MAP[key]
-                swf_path, map_lvl, base_lvl, is_inst = LEVEL_CONFIG[next_level]
-                char = session.current_char or session.player_data
-                tk = session.issue_token(char)
 
-                enter_pkt = build_enter_world_packet(
-                    transfer_token=tk,
-                    old_level_id=LEVEL_CONFIG[current][1],
-                    old_swf=LEVEL_CONFIG[current][0],
-                    has_old_coord=False,
-                    old_x=0,
-                    old_y=0,
-                    host=HOST, port=8080,
-                    new_level_swf=swf_path,
-                    new_map_lvl=map_lvl,
-                    new_base_lvl=base_lvl,
-                    new_internal=next_level,
-                    new_moment="", new_alter="",
-                    new_is_inst=is_inst,
-                )
-                conn.sendall(enter_pkt)
-                print(f"Sent level‑change: {current} → {next_level} (token={tk})")
-                session.current_level = next_level
+                session.enter_level(next_level, current, door_id)
             elif pkt == 0xBD:
                 handle_hotbar_packet(session, data)
 
