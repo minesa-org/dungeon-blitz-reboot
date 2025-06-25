@@ -287,6 +287,9 @@ DOOR_MAP = {
     ('CemeteryHillHard', 209): 'CH_MiniMission9Hard',
     # from 'CraftTownTutorial'
     ('CraftTownTutorial', 2): 'CraftTown',
+
+    # leaving the player house back to the starting zone
+    ('CraftTown', 0): 'NewbieRoad',
     # from 'EmeraldGlades'
     ('EmeraldGlades', 1): 'OldMineMountain',
     ('EmeraldGlades', 101): 'EG_Mission1',

@@ -238,22 +238,25 @@ def handle_client(session: ClientSession):
             elif pkt == 0x2D:
                 door_id = BitReader(data[4:]).read_method_4()
                 print(f"[{session.addr}] OPEN_DOOR packet received, door_id={door_id}")
-                # Only send Enter‑World once:
-                """"
+                # Only send Enter‑World once per session
                 if session.world_loaded:
                     print("World already loaded; skipping world‑change on door click.")
                     continue
+
                 current = getattr(session, "current_level", None)
                 if current is None:
                     print(f"No current_level; cannot open door {door_id}")
                     continue
+
                 key = (current, door_id)
                 if key not in DOOR_MAP:
                     print(f"Unknown door key: {key}")
                     continue
+
                 next_level = DOOR_MAP[key]
                 swf_path, map_lvl, base_lvl, is_inst = LEVEL_CONFIG[next_level]
                 tk = session.issue_token(session.player_data)
+
                 enter_pkt = build_enter_world_packet(
                     transfer_token=tk,
                     old_level_id=LEVEL_CONFIG[current][1],
@@ -267,13 +270,12 @@ def handle_client(session: ClientSession):
                     new_base_lvl=base_lvl,
                     new_internal=next_level,
                     new_moment="", new_alter="",
-                    new_is_inst=is_inst
+                    new_is_inst=is_inst,
                 )
                 conn.sendall(enter_pkt)
                 print(f"Sent level‑change: {current} → {next_level} (token={tk})")
                 session.current_level = next_level
-                session.world_loaded = True  # ← mark that we've done it
-                 """
+                session.world_loaded = True  # mark that we've done it
             elif pkt == 0xBD:
                 handle_hotbar_packet(session, data)
 
