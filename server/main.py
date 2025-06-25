@@ -261,8 +261,8 @@ def handle_client(session: ClientSession):
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
                 elif current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
                     next_level = "TutorialBoat"
-                # Leaving the player's house always returns to NewbieRoad
-                elif door_id == DOOR_LEAVEHOME:
+                # Leaving the player's house in CraftTown returns to NewbieRoad
+                elif current == "CraftTown" and door_id == DOOR_LEAVEHOME:
                     next_level = "NewbieRoad"
                 else:
                     key = (current, door_id)
@@ -278,9 +278,9 @@ def handle_client(session: ClientSession):
                     transfer_token=tk,
                     old_level_id=LEVEL_CONFIG[current][1],
                     old_swf=LEVEL_CONFIG[current][0],
-                    has_old_coord=True,
-                    old_x=session.player_data.get("x", 0),
-                    old_y=session.player_data.get("y", 0),
+                    has_old_coord=False,
+                    old_x=0,
+                    old_y=0,
                     host=HOST, port=8080,
                     new_level_swf=swf_path,
                     new_map_lvl=map_lvl,
