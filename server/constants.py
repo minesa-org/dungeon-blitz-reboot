@@ -34,8 +34,10 @@ class_7_const_75 = 6
 DOOR_TUTORIALBOAT = 104
 
 # Door ID for leaving the player's house back to NewbieRoad.
-# The ActionScript defines this as `new Door("LeaveHome",0,...)` and the
-# button's click handler `method_1982` in `class_79` triggers it.
+# ActionScript reference:
+#   in `class_79.method_1982` the button `am_GoLeave` (stored in `var_1103`)
+#   calls `OpenDoor(new Door("LeaveHome",0,0,null,0,null));`
+#   `Game.txt` also invokes the same door when the player exits their house.
 DOOR_LEAVEHOME = 0
 
 # Door ID used by the "GoHome" button for teleporting to the house

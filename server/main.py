@@ -292,9 +292,11 @@ def handle_client(session: ClientSession):
                 # door 999 teleports home regardless of current zone
                 if door_id == DOOR_GOHOME:
                     next_level = "CraftTown"
-                # door 0 is used inside the player house to go back out. The
-                # client triggers this via the "LeaveHome" button handled by
-                # `class_79.method_1982` in the ActionScript.
+                # door 0 is used to exit the player house. In the ActionScript
+                # UI class `class_79` the "Leave" button (`am_GoLeave`, stored in
+                # field `var_1103`) calls `method_1982` which in turn issues
+                # `OpenDoor(new Door("LeaveHome",0,0,null,0,null))`.
+                # When we see this door ID we teleport back to NewbieRoad.
                 elif door_id == DOOR_LEAVEHOME:
                     # Leave the player house. The button "am_GoLeave" in
                     # `class_79.method_1982` triggers this door with ID 0.
