@@ -298,15 +298,13 @@ def handle_client(session: ClientSession):
                 # `OpenDoor(new Door("LeaveHome",0,0,null,0,null))`.  When we
                 # receive this door ID we teleport back to NewbieRoad.
                 elif door_id == DOOR_LEAVEHOME:
-                    # Leave the player house. The button "am_GoLeave" in
-                    # `class_79.method_1982` triggers this door with ID 0.
+                    # Exit the player house. In `class_79.method_1982` the
+                    # button am_GoLeave (stored in `var_1103`) calls
+                    # `OpenDoor(new Door("LeaveHome",0,0,null,0,null))`.
+                    # Regardless of the current map, treat this as returning to
+                    # NewbieRoad and use CraftTown as the previous level so the
+                    # spawn coordinates match the client expectation.
                     next_level = "NewbieRoad"
-                    if current not in ("CraftTown", "CraftTownTutorial"):
-                        print(
-                            f"Warning: LeaveHome door used while current_level={current}"
-                        )
-                    # The client expects the previous level to be CraftTown so
-                    # collisions and spawn points line up correctly.
                     current = "CraftTown"
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
                 elif current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
