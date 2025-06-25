@@ -32,6 +32,10 @@ class_7_const_75 = 6
 # Door ID used in NewbieRoad for entering the TutorialBoat
 # Source: `class_11.const_641` in the game's ActionScript
 DOOR_TUTORIALBOAT = 104
+
+# Door ID used when exiting the player's house back to NewbieRoad
+# Defined in `Game.txt` via `new Door("LeaveHome",0,...)`
+DOOR_LEAVEHOME = 0
 GEARTYPE_BITS = 11
 
 SLOT_BIT_WIDTHS = []

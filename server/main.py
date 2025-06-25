@@ -12,7 +12,7 @@ from Character import (
 )
 from Commands import handle_hotbar_packet
 from BitUtils import BitBuffer
-from constants import EntType, DyeType, DOOR_TUTORIALBOAT
+from constants import EntType, DyeType, DOOR_TUTORIALBOAT, DOOR_LEAVEHOME
 from WorldEnter import build_enter_world_packet, Player_Data_Packet
 from bitreader import BitReader
 from PolicyServer import start_policy_server
@@ -228,9 +228,10 @@ def handle_client(session: ClientSession):
                         session.player_data = json.load(f)
                     # Also set current_character if you haven’t already
                     session.current_character = char["name"]
-                     # The server just sent them into `char["knownLevels"][0]`, so:
-                    first_level = char.get("knownLevels", [{}])[0].get("name", "NewbieRoad")
-                    session.current_level = first_level
+                     # Preserve current_level if already set by selection
+                    if session.current_level is None:
+                        first_level = char.get("knownLevels", [{}])[0].get("name", "NewbieRoad")
+                        session.current_level = first_level
                     welcome = Player_Data_Packet(char, transfer_token=token)
                     conn.sendall(welcome)
                     print("Welcome:", char["name"], "(used token", token, ")")
@@ -248,6 +249,9 @@ def handle_client(session: ClientSession):
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
                 if current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
                     next_level = "TutorialBoat"
+                # Leaving the player's house back to NewbieRoad
+                elif current == "CraftTown" and door_id == DOOR_LEAVEHOME:
+                    next_level = "NewbieRoad"
                 else:
                     key = (current, door_id)
                     if key not in DOOR_MAP:
