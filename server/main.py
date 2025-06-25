@@ -17,6 +17,7 @@ from WorldEnter import build_enter_world_packet, Player_Data_Packet
 from bitreader import BitReader
 from PolicyServer import start_policy_server
 from static_server import start_static_server
+from level_config import LEVEL_CONFIG, DOOR_MAP
 
 HOST = "127.0.0.1"
 PORTS = [8080]#7498 for Developer mode
@@ -180,7 +181,7 @@ def handle_client(session: ClientSession):
                     if c["name"] == name:
                         # Remember which character was selected
                         session.current_character = name
-                        session.current_level = "CraftTown"
+                        session.current_level = "NewbieRoad"
                         # **Inject the user_id so char carries it forward**
                         c["user_id"] = session.user_id
                         tk = session.issue_token(c)
@@ -193,10 +194,10 @@ def handle_client(session: ClientSession):
                             old_y=0,
                             host="127.0.0.1",
                             port=8080,
-                            new_level_swf="LevelsHome.swf/a_Level_Home",
+                            new_level_swf="LevelsNR.swf/a_Level_NewbieRoad",
                             new_map_lvl=1,
                             new_base_lvl=1,
-                            new_internal="CraftTown",
+                            new_internal="NewbieRoad",
                             new_moment="",
                             new_alter="",
                             new_is_inst=False
