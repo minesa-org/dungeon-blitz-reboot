@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import os
 
 
 class MissionDef:
@@ -8,6 +9,9 @@ class MissionDef:
         self.var_134   = var_134
 
 def load_mission_defs(path: str):
+    if not os.path.isfile(path):
+        print(f"[missions] Missing {path}; using empty mission definitions")
+        return [None]
     tree = ET.parse(path)
     root = tree.getroot()
     defs = [None]  # index 0 unused
