@@ -52,6 +52,7 @@ class ClientSession:
 
         self.player_data = {}
         self.current_character = None
+        self.current_char = None
         self.current_level = None
 
     def issue_token(self, char):
@@ -186,6 +187,7 @@ def handle_client(session: ClientSession):
                     if c["name"] == name:
                         # Remember which character was selected
                         session.current_character = name
+                        session.current_char = c
                         session.current_level = "NewbieRoad"
                         # **Inject the user_id so char carries it forward**
                         c["user_id"] = session.user_id
@@ -234,7 +236,8 @@ def handle_client(session: ClientSession):
                         session.player_data = json.load(f)
                     # Also set current_character if you haven’t already
                     session.current_character = char["name"]
-                     # Preserve current_level if already set by selection
+                    session.current_char = char
+                    # Preserve current_level if already set by selection
                     if session.current_level is None:
                         first_level = char.get("knownLevels", [{}])[0].get("name", "NewbieRoad")
                         session.current_level = first_level
@@ -268,7 +271,8 @@ def handle_client(session: ClientSession):
                         continue
                     next_level = DOOR_MAP[key]
                 swf_path, map_lvl, base_lvl, is_inst = LEVEL_CONFIG[next_level]
-                tk = session.issue_token(session.player_data)
+                char = session.current_char or session.player_data
+                tk = session.issue_token(char)
 
                 enter_pkt = build_enter_world_packet(
                     transfer_token=tk,
