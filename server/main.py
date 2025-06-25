@@ -258,12 +258,13 @@ def handle_client(session: ClientSession):
                 # door 999 teleports home regardless of current zone
                 if door_id == DOOR_GOHOME:
                     next_level = "CraftTown"
+                # door 0 is used inside the player house to go back out
+                # treat it specially even if the server's current_level is stale
+                elif door_id == DOOR_LEAVEHOME:
+                    next_level = "NewbieRoad"
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
                 elif current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
                     next_level = "TutorialBoat"
-                # Leaving the player's house in CraftTown returns to NewbieRoad
-                elif current == "CraftTown" and door_id == DOOR_LEAVEHOME:
-                    next_level = "NewbieRoad"
                 else:
                     key = (current, door_id)
                     if key not in DOOR_MAP:
