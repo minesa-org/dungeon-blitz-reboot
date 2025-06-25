@@ -448,12 +448,17 @@ def accept_connections(s, port):
             print(f"Error accepting connections on port {port}: {e}")
 
 def start_servers():
+    """Start TCP servers on all configured ports."""
     servers = []
     for port in PORTS:
         server = start_server(port)
         if server:
             servers.append((server, port))
-            threading.Thread(target=accept_connections, args=(server, port), daemon=True).start()
+            threading.Thread(
+                target=accept_connections,
+                args=(server, port),
+                daemon=True,
+            ).start()
     return servers
 
 if __name__ == "__main__":
