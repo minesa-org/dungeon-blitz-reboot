@@ -260,8 +260,11 @@ def handle_client(session: ClientSession):
                     # Now this returns the right user_id
                     session.user_id = char["user_id"]
                     # Load their save
-                    with open(f"saves/{session.user_id}.json", "r") as f:
-                        session.player_data = json.load(f)
+                    try:
+                        with open(f"saves/{session.user_id}.json", "r") as f:
+                            session.player_data = json.load(f)
+                    except FileNotFoundError:
+                        session.player_data = {}
                     # Also set current_character if you haven’t already
                     session.current_character = char["name"]
                     session.current_char = char
