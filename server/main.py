@@ -292,7 +292,11 @@ def handle_client(session: ClientSession):
                 elif door_id == DOOR_LEAVEHOME:
                     next_level = "NewbieRoad"
                     if current not in ("CraftTown", "CraftTownTutorial"):
-                        print(f"Warning: LeaveHome door used while current_level={current}")
+                        print(
+                            f"Warning: LeaveHome door used while current_level={current}"
+                        )
+                    # force old level to CraftTown so collisions match
+                    current = "CraftTown"
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
                 elif current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
                     next_level = "TutorialBoat"
