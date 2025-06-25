@@ -292,20 +292,12 @@ def handle_client(session: ClientSession):
                 # door 999 teleports home regardless of current zone
                 if door_id == DOOR_GOHOME:
                     next_level = "CraftTown"
-                # door 0 is used to exit the player house. In the ActionScript
-                # UI file `class_79.txt`, the "Leave" button (`am_GoLeave` held
-                # in field `var_1103`) triggers `method_1982`, which calls
-                # `OpenDoor(new Door("LeaveHome",0,0,null,0,null))`.  When we
-                # receive this door ID we teleport back to NewbieRoad.
-                elif door_id == DOOR_LEAVEHOME:
-                    # Exit the player house. In `class_79.method_1982` the
-                    # button am_GoLeave (stored in `var_1103`) calls
-                    # `OpenDoor(new Door("LeaveHome",0,0,null,0,null))`.
-                    # Regardless of the current map, treat this as returning to
-                    # NewbieRoad and use CraftTown as the previous level so the
-                    # spawn coordinates match the client expectation.
+                # door 0 exits the house back to NewbieRoad. The ActionScript
+                # house UI (`class_79.method_1982`) binds button `am_GoLeave`
+                # (field `var_1103`) to `OpenDoor(new Door("LeaveHome",0,0,null,0,null))`.
+                # Only handle this ID when actually inside the house.
+                elif door_id == DOOR_LEAVEHOME and current in ("CraftTown", "CraftTownTutorial"):
                     next_level = "NewbieRoad"
-                    current = "CraftTown"
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
                 elif current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
                     next_level = "TutorialBoat"
