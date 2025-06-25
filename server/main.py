@@ -261,8 +261,8 @@ def handle_client(session: ClientSession):
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
                 elif current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
                     next_level = "TutorialBoat"
-                # Leaving the player's house back to NewbieRoad
-                elif current == "CraftTown" and door_id == DOOR_LEAVEHOME:
+                # Leaving the player's house always returns to NewbieRoad
+                elif door_id == DOOR_LEAVEHOME:
                     next_level = "NewbieRoad"
                 else:
                     key = (current, door_id)
