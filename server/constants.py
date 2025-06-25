@@ -34,7 +34,8 @@ class_7_const_75 = 6
 DOOR_TUTORIALBOAT = 104
 
 # Door ID used when exiting the player's house back to NewbieRoad
-# Defined in `Game.txt` via `new Door("LeaveHome",0,...)`
+# Defined in `Game.txt` via `new Door("LeaveHome",0,...)` and the
+# `method_1982` handler in `class_79`
 DOOR_LEAVEHOME = 0
 
 # Door ID used by the "GoHome" button for teleporting to the house
