@@ -1,0 +1,25 @@
+workflow:
+  rules:
+    - if: "$CI_COMMIT_BRANCH"
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
+      when: always
+
+stages:
+  - build
+
+include:
+  - local: '/.gitlab/workflows/actions.yml'
+
+Build:
+  stage: build
+  script:
+    - echo "Build job"
+  when: manual  # Trigger this job manually
+
+  # Use input parameters to control behavior during manual triggers
+  variables:
+    BUILD_OPTION: "default"  # Default value for inputs
+  only:
+    - merge_requests
+
