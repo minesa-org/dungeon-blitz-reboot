@@ -292,18 +292,16 @@ def handle_client(session: ClientSession):
                 # door 999 teleports home regardless of current zone
                 if door_id == DOOR_GOHOME:
                     next_level = "CraftTown"
-                # door 0 exits the house back to NewbieRoad. The ActionScript
-                # house UI (`class_79.method_1982`) binds button `am_GoLeave`
-                # (field `var_1103`) to `OpenDoor(new Door("LeaveHome",0,0,null,0,null))`.
-                # Only handle this ID when actually inside the house.
-                elif door_id == DOOR_LEAVEHOME and current in ("CraftTown", "CraftTownTutorial"):
+                # door 0 exits the house back to NewbieRoad. ActionScript
+                # `class_79.method_1982` binds the Leave button (`var_1103`)
+                # to `OpenDoor(new Door("LeaveHome",0,0,null,0,null))`.
+                # Handle this ID even if our `current_level` tracking failed
+                # so players can always leave their house.
+                elif door_id == DOOR_LEAVEHOME:
                     next_level = "NewbieRoad"
-                    # The ActionScript house UI (class_79.method_1982) opens a
-                    # door named "LeaveHome" with ID 0. The client expects the
-                    # previous map to be CraftTown when exiting, even from the
-                    # tutorial variant, otherwise the spawn coordinates get
-                    # misaligned and cause a RangeError. Force the old level to
-                    # CraftTown for this door.
+                    # The client expects CraftTown as the previous level when
+                    # exiting the house or its tutorial variant; otherwise the
+                    # spawn coordinates are invalid and trigger RangeErrors.
                     session.enter_level(next_level, "CraftTown", door_id)
                     continue
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
