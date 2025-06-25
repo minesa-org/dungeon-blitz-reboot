@@ -286,10 +286,13 @@ def handle_client(session: ClientSession):
                 # door 999 teleports home regardless of current zone
                 if door_id == DOOR_GOHOME:
                     next_level = "CraftTown"
-                # door 0 is used inside the player house to go back out
-                # treat it specially even if the server's current_level is stale
+                # door 0 is used inside the player house to go back out. The
+                # client triggers this via the "LeaveHome" button handled by
+                # `class_79.method_1982` in the ActionScript.
                 elif door_id == DOOR_LEAVEHOME:
                     next_level = "NewbieRoad"
+                    if current not in ("CraftTown", "CraftTownTutorial"):
+                        print(f"Warning: LeaveHome door used while current_level={current}")
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
                 elif current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
                     next_level = "TutorialBoat"

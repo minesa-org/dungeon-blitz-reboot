@@ -290,6 +290,7 @@ DOOR_MAP = {
 
     # leaving the player house back to the starting zone
     ('CraftTown', 0): 'NewbieRoad',
+    ('CraftTownTutorial', 0): 'NewbieRoad',
     # from 'EmeraldGlades'
     ('EmeraldGlades', 1): 'OldMineMountain',
     ('EmeraldGlades', 101): 'EG_Mission1',
