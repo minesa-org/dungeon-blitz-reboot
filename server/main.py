@@ -298,6 +298,14 @@ def handle_client(session: ClientSession):
                 # Only handle this ID when actually inside the house.
                 elif door_id == DOOR_LEAVEHOME and current in ("CraftTown", "CraftTownTutorial"):
                     next_level = "NewbieRoad"
+                    # The ActionScript house UI (class_79.method_1982) opens a
+                    # door named "LeaveHome" with ID 0. The client expects the
+                    # previous map to be CraftTown when exiting, even from the
+                    # tutorial variant, otherwise the spawn coordinates get
+                    # misaligned and cause a RangeError. Force the old level to
+                    # CraftTown for this door.
+                    session.enter_level(next_level, "CraftTown", door_id)
+                    continue
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
                 elif current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
                     next_level = "TutorialBoat"
