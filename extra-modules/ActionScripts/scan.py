@@ -10,7 +10,7 @@ def scan_as_files(directory, search_text):
     # Walk through all subdirectories
     for root, dirs, files in os.walk(directory):
         for filename in files:
-            if filename.endswith(".txt"):  # Change this extension if you want .as instead
+            if filename.endswith(".as"):  # Change this extension if you want .as instead
                 file_path = os.path.join(root, filename)
                 
                 try:
