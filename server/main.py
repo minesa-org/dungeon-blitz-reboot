@@ -293,12 +293,15 @@ def handle_client(session: ClientSession):
                 # client triggers this via the "LeaveHome" button handled by
                 # `class_79.method_1982` in the ActionScript.
                 elif door_id == DOOR_LEAVEHOME:
+                    # Leave the player house. The button "am_GoLeave" in
+                    # `class_79.method_1982` triggers this door with ID 0.
                     next_level = "NewbieRoad"
                     if current not in ("CraftTown", "CraftTownTutorial"):
                         print(
                             f"Warning: LeaveHome door used while current_level={current}"
                         )
-                    # force old level to CraftTown so collisions match
+                    # The client expects the previous level to be CraftTown so
+                    # collisions and spawn points line up correctly.
                     current = "CraftTown"
                 # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
                 elif current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
