@@ -12,7 +12,7 @@ from Character import (
 )
 from Commands import handle_hotbar_packet
 from BitUtils import BitBuffer
-from constants import EntType, DyeType
+from constants import EntType, DyeType, DOOR_TUTORIALBOAT
 from WorldEnter import build_enter_world_packet, Player_Data_Packet
 from bitreader import BitReader
 from PolicyServer import start_policy_server
@@ -249,12 +249,15 @@ def handle_client(session: ClientSession):
                     print(f"No current_level; cannot open door {door_id}")
                     continue
 
-                key = (current, door_id)
-                if key not in DOOR_MAP:
-                    print(f"Unknown door key: {key}")
-                    continue
-
-                next_level = DOOR_MAP[key]
+                # TutorialBoat entry door is constant DOOR_TUTORIALBOAT
+                if current == "NewbieRoad" and door_id == DOOR_TUTORIALBOAT:
+                    next_level = "TutorialBoat"
+                else:
+                    key = (current, door_id)
+                    if key not in DOOR_MAP:
+                        print(f"Unknown door key: {key}")
+                        continue
+                    next_level = DOOR_MAP[key]
                 swf_path, map_lvl, base_lvl, is_inst = LEVEL_CONFIG[next_level]
                 tk = session.issue_token(session.player_data)
 

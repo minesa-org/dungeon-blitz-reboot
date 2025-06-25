@@ -28,6 +28,10 @@ quest_val = None
 class_9_const_129 = 5
 class_66_const_571 = 2
 class_7_const_75 = 6
+
+# Door ID used in NewbieRoad for entering the TutorialBoat
+# Source: `class_11.const_641` in the game's ActionScript
+DOOR_TUTORIALBOAT = 104
 GEARTYPE_BITS = 11
 
 SLOT_BIT_WIDTHS = []
