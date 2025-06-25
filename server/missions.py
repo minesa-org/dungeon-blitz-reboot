@@ -8,12 +8,30 @@ class MissionDef:
         self.var_908   = var_908
         self.var_134   = var_134
 
+def _extract_from_swz(swz_path: str):
+    if not os.path.isfile(swz_path):
+        return None
+    with open(swz_path, "r", encoding="utf-8") as f:
+        text = f.read()
+    start = text.find("<MissionTypes")
+    end = text.find("</MissionTypes>")
+    if start == -1 or end == -1:
+        return None
+    xml = text[start:end + len("</MissionTypes>")]
+    return ET.fromstring(xml)
+
+
 def load_mission_defs(path: str):
     if not os.path.isfile(path):
-        print(f"[missions] Missing {path}; using empty mission definitions")
-        return [None]
-    tree = ET.parse(path)
-    root = tree.getroot()
+        # Fallback to the data extracted from Game.swz
+        swz_root = _extract_from_swz("data/swz-files/Game.swz.txt")
+        if swz_root is None:
+            print(f"[missions] Missing {path}; using empty mission definitions")
+            return [None]
+        root = swz_root
+    else:
+        tree = ET.parse(path)
+        root = tree.getroot()
     defs = [None]  # index 0 unused
     for node in root.findall('MissionType'):
         mid   = int(node.findtext('MissionID', '0'))
