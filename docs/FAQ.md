@@ -6,11 +6,11 @@
 
 Yes, sorta whilst there are issues it is sorta playable. Keep in mind there are a lot of missing stuff.
 
-### At which platforms does the game run on
+### At which platforms does the game run on?
 
 ### 🧰 Requirements
 
-1. [This repository](https://github.com/minesa-org/flash-reboot/archive/refs/heads/main.zip)
+1. [This repository](https://github.com/minesa-org/dungeon-blitz-reboot/archive/refs/heads/main.zip)
  
 2. [Python 3.xx](https://python.org/downloads)
 
