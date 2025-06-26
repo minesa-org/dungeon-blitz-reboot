@@ -1,3 +1,7 @@
-* @NeutralTheGreat @Neodevils
+* @Neodevils
 
-./docs/*.md @Twig6943
+*.py @NeutralTheGreat
+*.as @NeutralTheGreat
+*.txt @NeutralTheGreat
+
+*.md @Twig6943
