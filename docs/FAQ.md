@@ -2,6 +2,10 @@
 
  This repo lets you run **Dungeon Blitz**, the classic browser MMO, directly on your machine using a localy run server. 
 
+### Any release date/s?
+
+No. It'll come out when it does.
+
 ### Is the game completely playable offline?
 
 Yes, sorta whilst there are issues it is sorta playable. Keep in mind there are a lot of missing stuff.
