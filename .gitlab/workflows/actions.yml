@@ -1,0 +1,14 @@
+stages:
+  - build
+
+build_client:
+  stage: build
+  tags:
+    - windows
+  script:
+    - echo "Placeholder"
+
+  artifacts:
+    paths:
+      - flash-reboot/
+    name: "Out"
