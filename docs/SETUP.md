@@ -4,10 +4,10 @@
 
 ##
 
+## 1. Setting up the server
+
 > [!IMPORTANT] 
 > Skip the this step if you're not going to host the server yourself.
-
-## 1. Setting up the server
 
 Install [Python 3.xx](https://www.python.org/downloads/release/python-3135/)
 
