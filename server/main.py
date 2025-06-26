@@ -417,7 +417,12 @@ if __name__ == "__main__":
     start_policy_server(host="127.0.0.1", port=843)
     start_static_server(host="127.0.0.1", port=80, directory="content/localhost")
     servers = start_servers()
-    print("running on : http://localhost/index.html")
+    print("""
+          ----------------------------------------------------
+          Paste this to Adobe Flash Projector: 
+          http://localhost/p/cbv/DungeonBlitz.swf?fv=cbq&gv=cbv
+          ----------------------------------------------------
+          """)
     #print("running on : http://localhost/DeveloperMode.html")
     try:
         while True:
