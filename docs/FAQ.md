@@ -18,7 +18,7 @@ Yes, sorta whilst there are issues it is sorta playable. Keep in mind there are 
  
 2. [Python 3.xx](https://python.org/downloads)
 
-3. [FlashPoint](https://flashpointarchive.org/downloads)
+3. [Flash Player Projector](https://github.com/Grubsic/Adobe-Flash-Player-Debug-Downloads-Archive)
 
 ## 📁 Folder Structure explanation
 
