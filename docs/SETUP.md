@@ -1,54 +1,15 @@
-# Setup
+# Setup ⚙️
 
-<img src="/assets/ss.png" width="35rem" style="vertical-align: middle;">
+<img src="/assets/ss.png" width="2000rem" style="vertical-align: middle;">
 
-## 1. Editing your `hosts` file
-
-Add these to your `hosts` file depending on your OS.
-
-### Windows 🟦
-
-`Windows/System32/drivers/etc/hosts`
-
-### Linux 🐧
-
-`/etc/hosts`
-
-### MacOS 🍎
-
-`/private/etc/hosts`
-
-```sh
-127.0.0.1  www.dungeonblitz.com 
-127.0.0.1  db.bmgstatic.com
-```
-
-## 2. Setting up [Python 3.xx](https://www.python.org/downloads/release/python-3135/)
-
-## 3. Setting up Flashpoint
-
-### [Windows 🟦](https://github.com/FlashpointProject/FlashpointComponentTools/releases/latest/download/FlashpointInstaller.exe)
-
-### Linux 🐧
-
-You can install Flaspoint via your distribution's package manager
-
-```sh
-yay -S flashpoint-launcher-bin
-```
-
-### MacOS 🍎
-
-Run this on your terminal.
-
-```sh
-mkdir -p ~/Downloads && curl -fL https://download.flashpointarchive.org/upload/fp14.0.2_mac.txz | tar xC ~/Downloads
-```
+##
 
 > [!IMPORTANT] 
-> Skip the 4th step if you're not going to host the server yourself.
+> Skip the this step if you're not going to host the server yourself.
 
-## 4. Setting up the server (Skip this step if you're not hosting)
+## 1. Setting up the server
+
+Install [Python 3.xx](https://www.python.org/downloads/release/python-3135/)
 
 - Run these commands
 
@@ -59,24 +20,15 @@ cd flash-reboot\server
 sudo python main.py
 ```
 
-You should have a server up and running after this step.
+## 2. Joining to a server
 
-## 4.1 Inserting files inside Flashpoint
+Download [flash projector](https://archive.org/details/flashplayer32_0r0_363_win_sa) for your OS.
 
-- Open up Flashpoint
+Open this url
 
-- Go to `Config` and enable `Enable Editing`
-
-- Go to `Curate` and click to `New Curation`
-
-- Click open folder (As of writing this doesn't work on Linux/MacOS, you need to go to the directory yourself)
-
-- Copy everything inside `server/content` to your game's folder click replace when asked.
-
-- Tap to `Run`
-
-> [!WARNING]  
-> Flash 32 (which is the default) tends to not run on MacOS. You might try different flash versions if you're on MacOS. (e.g. `flashplayer11_9r900_152_win_sa_debug.exe` )
+```sh
+http://localhost/p/cbv/DungeonBlitz.swf?fv=cbq&gv=cbv
+```
 
 ### Public Instances/Servers to join
 
