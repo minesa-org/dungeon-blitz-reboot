@@ -20,9 +20,9 @@ cd flash-reboot\server
 sudo python main.py
 ```
 
-## 2. Joining to a server
+## 2. Setting up a server to play
 
-Download [flash projector](https://archive.org/details/flashplayer32_0r0_363_win_sa) for your OS.
+Download [flash projector](https://github.com/Grubsic/Adobe-Flash-Player-Debug-Downloads-Archive) for your OS.
 
 Open this url
 
@@ -33,5 +33,5 @@ http://localhost/p/cbv/DungeonBlitz.swf?fv=cbq&gv=cbv
 ### Public Instances/Servers to join
 
 ```sh
-# maybe later
+# We will add this later...
 ```
