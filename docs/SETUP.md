@@ -14,7 +14,7 @@ Install [Python 3.xx](https://www.python.org/downloads/release/python-3135/)
 - Run these commands
 
 ```sh
-git clone https://github.com/minesa-org/flash-reboot 
+git clone https://github.com/minesa-org/dungeon-blitz-reboot.git
 cd flash-reboot\server
 # Replace the forward slash with a backward one on linux/MacOS
 sudo python main.py
