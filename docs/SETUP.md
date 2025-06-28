@@ -2,12 +2,12 @@
 
 <img src="/assets/ss.png" width="2000rem" style="vertical-align: middle;">
 
-##
+## Playing Locally
 
-## 1. Setting up the server
+### 1. Setting up the server
 
 > [!IMPORTANT] 
-> Skip the this step if you're not going to host the server yourself.
+> Skip the step if you're not going to host the server by yourself.
 
 Install [Python 3.xx](https://www.python.org/downloads/release/python-3135/)
 
@@ -20,7 +20,7 @@ cd flash-reboot\server
 sudo python main.py
 ```
 
-## 2. Setting up a server to play
+### 2. Setting up a server to play
 
 Download [flash projector](https://github.com/Grubsic/Adobe-Flash-Player-Debug-Downloads-Archive) for your OS.
 
@@ -30,8 +30,6 @@ Open this url
 http://localhost/p/cbv/DungeonBlitz.swf?fv=cbq&gv=cbv
 ```
 
-### Public Instances/Servers to join
+## Public Instances/Servers to join
 
-```sh
-# We will add this later...
-```
+*We will add this later...*
